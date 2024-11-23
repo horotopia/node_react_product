@@ -5,8 +5,8 @@ const router = Router();
 
 router.get('/', /*authenticateToken,*/ getProducts);
 router.get('/:id', /*authenticateToken,*/ getProductById);
-router.post('/', /*authenticateToken,*/ createProduct);
-router.put('/:id', /*authenticateToken,*/ updateProduct);
-router.delete('/:id', /*authenticateToken,*/ deleteProduct);
+router.post('/create', /*authenticateToken,*/ createProduct);
+router.put('/update/:id', /*authenticateToken,*/ updateProduct);
+router.delete('/delete/:id', /*authenticateToken,*/ deleteProduct);
 
 module.exports = router;
