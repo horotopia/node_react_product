@@ -1,48 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
-import * as React from 'react';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
+const ListItem = require("@mui/material/ListItem");
+const ListItemText = require("@mui/material/ListItemText");
+const { useEffect, useState } = require("react");
+const { getAllProducts } = require("./api/api");
 
 function App() {
-  const [secondary, setSecondary] = React.useState(false);
+  const [items, setItems] = useState([]);
+  const [secondary, setSecondary] = useState(false);
+
+  // Appel des produits via useEffect
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const products = await getAllProducts(); // Appel de la fonction pour récupérer les produits
+        setItems(products); // Mise à jour de l'état avec les données récupérées
+        console.log(products); // Vérification des données récupérées
+      } catch (error) {
+        console.error("Erreur lors de la récupération des produits :", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <ListItem>
-        <ListItemText
-          primary="1er item"
-          secondary={secondary ? 'Secondary text' : null}
-        />
-        <ListItemText
-          primary="2 item"
-          secondary={secondary ? 'Secondary text' : null}
-        />
-        <ListItemText
-          primary="3 item"
-          secondary={secondary ? 'Secondary text' : null}
-        />
-        <ListItemText
-          primary="4 item"
-          secondary={secondary ? 'Secondary text' : null}
-        />
-      </ListItem>,
+      {/* Affichage des produits */}
+      {items.map((item) => (
+        <ListItem key={item.id}>
+          {" "}
+          {/* Ajout d'une clé unique */}
+          <ListItemText
+            primary={item.name}
+            secondary={secondary ? item.description : null}
+          />
+        </ListItem>
+      ))}
     </div>
   );
 }
 
-export default App;
+module.exports = { App };
