@@ -31,21 +31,14 @@ const createProduct = async (req, res) => {
     if(!req.body || !req.body.name || !req.body.type || !req.body.price || !req.body.rating || !req.body.warranty_years || !req.body.available) {
         return res.status(400).json({ message: 'Missing product data' });
     }
+
     try {
-        const productByName = await product.find({ name: req.body.name });
-        if (productByName.length) {
-            return res.status(409).json({ message: 'Product already exists' });
-        }
-    }   catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-    const newProduct = new product(req.body);
-    try {
-        const savedProduct = await newProduct.save();
-        res.status(201).json(savedProduct);
+        const newProduct = new product(req.body);
+        await newProduct.save();
+        res.status(201).json(newProduct);
     } catch (error) {
         res.status(500).json({ message: error.message });
-    }
+    }   
 }
 
 const updateProduct = async (req, res) => {
