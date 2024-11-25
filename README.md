@@ -1,4 +1,43 @@
-# node_react_product
+# Node_react_product
+
+## Lancer le projet
+
+### .env
+exemple: `node/.env`
+```
+PORT=5000
+MONGODB_URI=mongodb://localhost:27018
+MONGODB_USERNAME=bonsartisans
+MONGODB_PASSWORD=testtechnique
+DATABASE_NAME=products
+MONGODB_FULL_URI=mongodb://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@mongodb:27018/${DATABASE_NAME}
+```
+
+### Cloner le projet
+```sh
+git clone https://github.com/horotopia/node_react_product.git
+```
+
+### Lancer le Docker mongoDB
+```sh
+docker compose up
+```
+
+### Se déplacer dans le projet pour installer et lancer le serveur
+```sh
+cd node/
+npm i
+npm start
+```
+
+### Se déplacer dans le projet pour installer et lancer le client
+```sh
+cd ../react/
+npm i
+npm start
+```
+
+## Instructions
 
 Vous devez réaliser avant dimanche 15h00 :
 
