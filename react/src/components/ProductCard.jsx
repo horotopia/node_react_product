@@ -237,7 +237,7 @@ const ProductCard = ({ product }) => {
           Delete
         </Button>
         <Button
-          disabled={!isUpdateMode}
+          style={{ display: isUpdateMode ? "block" : "none" }}
           size="small"
           variant="contained"
           onClick={handleValidateUpdateClick}
